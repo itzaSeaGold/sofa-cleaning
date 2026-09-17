@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dịch vụ giặt sofa, giặt nệm, rèm cửa tận nhà chuyên nghiệp. Khử khuẩn 99.9% bằng hơi nước nóng, hóa chất sinh học an toàn. Gọi ngay 0338928237.">
+    <title>Dịch Vụ Vệ Sinh Sofa Chuyên Nghiệp | Sạch Như Mới</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES & RESET --- */
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --accent: #f97316;
+            --accent-hover: #ea580c;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-main); background-color: var(--white); line-height: 1.6; }
+        .container { width: 90%; max-width: 1140px; margin: 0 auto; }
+
+        /* --- TYPOGRAPHY & BUTTONS --- */
+        h1, h2, h3 { font-weight: 800; color: var(--text-main); line-height: 1.25; }
+        .section-title { font-size: 32px; text-align: center; margin-bottom: 12px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 45px; font-size: 16px; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 12px 26px; border-radius: 8px; font-weight: 700; font-size: 15px;
+            text-decoration: none; transition: all 0.25s ease; border: none; cursor: pointer; gap: 8px;
+        }
+        .btn-primary { background: var(--accent); color: var(--white); box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .btn-secondary { background: var(--primary-light); color: var(--primary-dark); }
+        .btn-secondary:hover { background: #bae6fd; }
+
+        /* --- NAVBAR --- */
+        .navbar { position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: var(--shadow-sm); z-index: 1000; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        .nav-menu { display: flex; gap: 28px; list-style: none; }
+        .nav-menu a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 15px; transition: color 0.2s; }
+        .nav-menu a:hover { color: var(--primary); }
+
+        /* --- HERO BANNER --- */
+        .hero { padding: 70px 0; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); position: relative; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .badge { display: inline-block; padding: 6px 14px; background: var(--white); color: var(--primary-dark); border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+        .hero h1 { font-size: 42px; margin-bottom: 18px; }
+        .hero p { font-size: 17px; color: var(--text-muted); margin-bottom: 28px; }
+        .hero-btns { display: flex; gap: 14px; }
+
+        /* TRUST BADGES */
+        .trust-list { display: flex; gap: 20px; margin-top: 35px; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 20px; }
+        .trust-item { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+
+        /* --- BEFORE / AFTER INTERACTIVE SLIDER --- */
+        .comparison-section { padding: 80px 0; background: var(--white); }
+        .img-slider-wrapper { position: relative; width: 100%; height: 420px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
+        .img-slider-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
+        .img-slider-after { background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80'); }
+        .img-slider-before { background-image: url('https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=1000&q=80'); width: 50%; border-right: 3px solid var(--white); }
+        .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: var(--white); cursor: ew-resize; z-index: 10; }
+        .slider-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); font-weight: bold; color: var(--primary); }
+        .slider-range { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 20; }
+        .tag-label { position: absolute; top: 15px; padding: 6px 12px; background: rgba(0,0,0,0.6); color: white; border-radius: 4px; font-size: 12px; font-weight: 700; pointer-events: none; }
+        .tag-before { left: 15px; } .tag-after { right: 15px; }
+
+        /* --- SERVICES SECTION --- */
+        .services { padding: 80px 0; background: var(--bg-light); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .service-card { background: var(--white); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s; border: 1px solid var(--border); }
+        .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .icon-box { width: 60px; height: 60px; background: var(--primary-light); color: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; }
+
+        /* --- PROCESS SECTION --- */
+        .process { padding: 80px 0; }
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .process-step { background: var(--white); padding: 25px; border-radius: var(--radius); border-left: 4px solid var(--primary); box-shadow: var(--shadow-sm); }
+        .step-num { font-size: 28px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+
+        /* --- PRICING SECTION --- */
+        .pricing { padding: 80px 0; background: var(--bg-light); }
+        .price-table-wrapper { overflow-x: auto; }
+        .price-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+        .price-table th, .price-table td { padding: 18px 24px; text-align: left; border-bottom: 1px solid var(--border); }
+        .price-table th { background: #f1f5f9; font-weight: 700; }
+        .price-tag { font-weight: 800; color: var(--accent); font-size: 18px; }
+
+        /* --- BOOKING FORM SECTION --- */
+        .booking { padding: 80px 0; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); }
+        .booking-box { max-width: 550px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: var(--radius); color: var(--text-main); box-shadow: var(--shadow-md); }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+        .form-control { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 15px; outline: none; }
+        .form-control:focus { border-color: var(--primary); }
+
+        /* --- FLOATING BUTTONS --- */
+        .floating-container { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+        .float-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.25); transition: transform 0.2s; }
+        .float-btn:hover { transform: scale(1.1); }
+        .float-zalo { background: #0068ff; font-size: 13px; }
+        .float-phone { background: #22c55e; font-size: 22px; }
+
+        /* --- FOOTER --- */
+        footer { background: #0f172a; color: #94a3b8; padding: 40px 0 20px; font-size: 14px; text-align: center; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 30px; }
+            .hero-btns { justify-content: center; }
+            .trust-list { justify-content: center; flex-wrap: wrap; }
+            .nav-menu { display: none; }
+            .img-slider-wrapper { height: 260px; }
+            .booking-box { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">SOFA<span>CLEAN</span></a>
+            <ul class="nav-menu">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#comparison">Thực tế</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="#pricing">Bảng giá</a></li>
+                <li><a href="#booking">Đặt lịch</a></li>
+            </ul>
+            <a href="tel:0338928237" class="btn btn-primary">📞 0338928237</a>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge">✨ Chuyên Nghiệp & Tận Tâm</span>
+                <h1>Trả Lại Sự Sạch Sẽ, Thơm Tho Cho Sofa Nhà Bạn</h1>
+                <p>Diệt khuẩn 99.9% bằng công nghệ phun hút hơi nước nóng. Sử dụng 100% dung dịch sinh học an toàn cho trẻ nhỏ và thú cưng.</p>
+                <div class="hero-btns">
+                    <a href="#booking" class="btn btn-primary">Đặt Lịch Ngay</a>
+                    <a href="#pricing" class="btn btn-secondary">Xem Bảng Giá</a>
+                </div>
+                <div class="trust-list">
+                    <div class="trust-item">✓ Cam kết sạch 100%</div>
+                    <div class="trust-item">✓ Không phát sinh phí</div>
+                    <div class="trust-item">✓ Phục vụ 24/7</div>
+                </div>
+            </div>
+            <div id="comparison" class="img-slider-wrapper">
+                <div class="img-slider-img img-slider-after"></div>
+                <div class="img-slider-img img-slider-before" id="heroBeforeImg"></div>
+                <div class="tag-label tag-before">Trước khi giặt</div>
+                <div class="tag-label tag-after">Sạch sau khi giặt</div>
+                <div class="slider-handle" id="heroHandle">
+                    <div class="slider-button">↔</div>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider-range" id="heroRange">
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Dịch Vụ Của Chúng Tôi</h2>
+            <p class="section-subtitle">Giải pháp làm sạch toàn diện cho mọi loại chất liệu nội thất</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box">🛋️</div>
+                    <h3>Giặt Sofa Vải / Nỉ</h3>
+                    <p>Đánh bay vết bẩn ố vàng, mồ hôi, thức ăn lưu ngày. Khử sạch mùi ẩm mốc triệt để.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">✨</div>
+                    <h3>Vệ Sinh Sofa Da</h3>
+                    <p>Làm sạch nhẹ nhàng, thoa kem dưỡng da cao cấp giúp bề mặt sofa mềm mại, không nứt nẻ.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">🛏️</div>
+                    <h3>Giặt Nệm & Rèm Cửa</h3>
+                    <p>Hút sạch bụi mịn, rệp giường và vi khuẩn ẩn sâu trong lòng nệm ngủ gia đình.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">🏢</div>
+                    <h3>Giặt Thảm Văn Phòng</h3>
+                    <p>Thi công nhanh chóng, khô tức thì trong 2 giờ, không làm ảnh hưởng công việc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Quy Trình 5 Bước Chuẩn Y Tế</h2>
+            <p class="section-subtitle">Minh bạch - Nhanh chóng - Hiệu quả cao</p>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-num">01</div>
+                    <h4>Kiểm Tra & Hút Bụi</h4>
+                    <p>Khảo sát chất liệu vải/da và hút sạch bụi bẩn khe cặn bề mặt.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">02</div>
+                    <h4>Phun Dung Dịch</h4>
+                    <p>Phun đều dung dịch sinh học chuyên dụng lên các vết bẩn cứng đầu.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">03</div>
+                    <h4>Đánh Tan Vết Bẩn</h4>
+                    <p>Dùng máy đánh bàn chải mềm làm tan hoàn toàn vết bẩn mà không xù lông.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">04</div>
+                    <h4>Phun Hút Hơi Nước</h4>
+                    <p>Hút sạch 100% nước bẩn và vi khuẩn bằng máy hút công suất lớn.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-num">05</div>
+                    <h4>Nghiệm Thu</h4>
+                    <p>Khách hàng kiểm tra chất lượng hài lòng mới tiến hành thanh toán.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Bảng Giá Dịch Vụ Niêm Yết</h2>
+            <p class="section-subtitle">Cam kết không phát sinh bất kỳ phụ phí nào</p>
+            <div class="price-table-wrapper">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Loại Sofa / Dịch Vụ</th>
+                            <th>Kích Thước / Mô Tả</th>
+                            <th>Thời Gian Làm</th>
+                            <th>Giá Trọn Gói</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Sofa Băng (Vải / Nỉ)</b></td>
+                            <td>Dài 1.2m - 1.8m (2-3 chỗ)</td>
+                            <td>60 phút</td>
+                            <td><span class="price-tag">290.000 đ</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Sofa Góc Chữ L (Vải / Nỉ)</b></td>
+                            <td>Kích thước tiêu chuẩn căn hộ</td>
+                            <td>90 phút</td>
+                            <td><span class="price-tag">390.000 đ</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Sofa Da Cao Cấp</b></td>
+                            <td>Bao gồm lau sạch + Thoa kem dưỡng da</td>
+                            <td>90 phút</td>
+                            <td><span class="price-tag">450.000 đ</span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Giặt Nệm Kymdan / Cotton</b></td>
+                            <td>Nệm 1m6 - 1m8 (2 mặt)</td>
+                            <td>60 phút</td>
+                            <td><span class="price-tag">300.000 đ</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING FORM -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <div class="booking-box">
+                <h2 style="text-align: center; margin-bottom: 8px;">Đặt Lịch Vệ Sinh Nhanh</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 24px; font-size: 14px;">Chuyên viên sẽ gọi điện tư vấn và xác nhận trong vòng 5 phút</p>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label>Họ và Tên (*)</label>
+                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Số Điện Thoại (*)</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="09x xxx xxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Dịch Vụ Cần Làm (*)</label>
+                        <select id="service" name="service" class="form-control" required>
+                            <option value="">-- Chọn dịch vụ --</option>
+                            <option value="Giặt Sofa Vải / Nỉ">Giặt Sofa Vải / Nỉ</option>
+                            <option value="Giặt & Dưỡng Sofa Da">Giặt & Dưỡng Sofa Da</option>
+                            <option value="Giặt Nệm Ngủ">Giặt Nệm Ngủ</option>
+                            <option value="Giặt Thảm / Rèm">Giặt Thảm / Rèm</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Địa Chỉ Của Bạn</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="Số nhà, Đường, Quận/Huyện">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">XÁC NHẬN ĐẶT LỊCH</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING BUTTONS -->
+    <div class="floating-container">
+        <a href="https://zalo.me/0338928237" target="_blank" class="float-btn float-zalo" title="Chat Zalo">Zalo</a>
+        <a href="tel:0338928237" class="float-btn float-phone" title="Gọi Điện">📞</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p><b>SOFACLEAN - DỊCH VỤ VỆ SINH SOFA TẬN NHÀ CHUYÊN NGHIỆP</b></p>
+            <p style="margin-top: 5px;">Hotline: 0338928237 | Phục vụ tất cả các ngày trong tuần</p>
+            <p style="margin-top: 15px; font-size: 12px; opacity: 0.6;">© 2026 SOFACLEAN. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Interactive Before/After Image Slider Logic
+            const range = document.getElementById('heroRange');
+            const beforeImg = document.getElementById('heroBeforeImg');
+            const handle = document.getElementById('heroHandle');
+
+            if(range && beforeImg && handle) {
+                range.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    beforeImg.style.width = `${val}%`;
+                    handle.style.left = `${val}%`;
+                });
+            }
+
+            // 2. Smooth Scroll for Navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // 3. Tự động chuyển thông tin đặt lịch sang Zalo nhắn tin trực tiếp
+            const bookingForm = document.getElementById('bookingForm');
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const fullname = document.getElementById('fullname').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    const service = document.getElementById('service').value;
+                    const address = document.getElementById('address').value.trim() || 'Chưa cung cấp';
+
+                    const message = `Xin chào! Tôi muốn đặt lịch dịch vụ:\n- Họ tên: ${fullname}\n- SĐT: ${phone}\n- Dịch vụ: ${service}\n- Địa chỉ: ${address}`;
+                    
+                    const zaloPhone = '0338928237';
+                    const zaloUrl = `https://zalo.me/${zaloPhone}?text=${encodeURIComponent(message)}`;
+
+                    alert('🎉 Cảm ơn bạn! Hệ thống sẽ chuyển thông tin đặt lịch sang Zalo để xác nhận ngay.');
+                    window.open(zaloUrl, '_blank');
+                    bookingForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
