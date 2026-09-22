@@ -89,7 +89,7 @@
         .tag-label { position: absolute; top: 15px; padding: 6px 14px; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); color: white; border-radius: 20px; font-size: 12px; font-weight: 700; pointer-events: none; }
         .tag-before { left: 15px; } .tag-after { right: 15px; }
 
-        /* --- PRICE CALCULATOR DẠNG TICKBOX XỊN XÒ --- */
+        /* --- PRICE CALCULATOR DẠNG TICKBOX --- */
         .calculator-section { padding: 80px 0; background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%); }
         .calc-card { background: var(--white); border-radius: var(--radius); padding: 35px; box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 850px; margin: 0 auto; }
         
@@ -491,7 +491,7 @@
                         <input type="checkbox" class="calc-checkbox">
                         <div class="calc-item-info">
                             <span class="calc-item-title">Thảm Văn Phòng (Nhập diện tích m²)</span>
-                            <span class="calc-item-price-tag">Từ 6.000 đ - 10.000 đ / m²</span>
+                            <span class="calc-item-price-tag">4.000 đ - 6.000 đ / m²</span>
                         </div>
                     </div>
                     <div class="calc-item-right">
@@ -538,7 +538,7 @@
                 <div class="service-card">
                     <div class="icon-box">🏢</div>
                     <h3>Giặt Thảm Văn Phòng</h3>
-                    <p>Giặt thảm công nghiệp diện tích từ dưới 100m² đến 5000m² với mức giá ưu đãi từ 6k - 10k/m².</p>
+                    <p>Giặt thảm công nghiệp diện tích từ dưới 100m² đến 5000m² với mức giá ưu đãi từ 4k - 6k/m².</p>
                 </div>
             </div>
         </div>
@@ -667,23 +667,18 @@
                         <tr><td colspan="3" class="category-header">🏢 GIẶT THẢM VĂN PHÒNG (Tùy số lượng)</td></tr>
                         <tr>
                             <td><b>Thảm Văn Phòng</b></td>
-                            <td>Dưới 100m²</td>
-                            <td><span class="price-tag">10.000 đ / m²</span></td>
-                        </tr>
-                        <tr>
-                            <td><b>Thảm Văn Phòng</b></td>
                             <td>Dưới 500m²</td>
-                            <td><span class="price-tag">8.000 đ / m²</span></td>
+                            <td><span class="price-tag">6.000 đ / m²</span></td>
                         </tr>
                         <tr>
                             <td><b>Thảm Văn Phòng</b></td>
                             <td>Dưới 1000m²</td>
-                            <td><span class="price-tag">7.000 đ / m²</span></td>
+                            <td><span class="price-tag">5.000 đ / m²</span></td>
                         </tr>
                         <tr>
                             <td><b>Thảm Văn Phòng</b></td>
                             <td>Từ 1000m² - 5000m²</td>
-                            <td><span class="price-tag">4.000 đ - 6.000 đ / m²</span></td>
+                            <td><span class="price-tag">4.000 đ / m²</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -827,7 +822,6 @@
                     const qtyInput = row.querySelector('.calc-qty-input');
                     const subtotalEl = row.querySelector('.calc-item-subtotal');
                     const priceType = row.getAttribute('data-price');
-                    const unit = row.getAttribute('data-unit');
 
                     if (checkbox.checked) {
                         row.classList.add('active');
@@ -839,12 +833,11 @@
                         let subtotal = 0;
 
                         if (priceType === 'carpet') {
-                            // Thảm tính bậc thang
-                            let pricePerM2 = 10000;
-                            if (qty >= 1000) pricePerM2 = 6000;
-                            else if (qty >= 500) pricePerM2 = 7000;
-                            else if (qty >= 100) pricePerM2 = 8000;
-                            else pricePerM2 = 10000;
+                            // Thảm tính giá 4k - 6k / m²
+                            let pricePerM2 = 6000;
+                            if (qty >= 1000) pricePerM2 = 4000;
+                            else if (qty >= 500) pricePerM2 = 5000;
+                            else pricePerM2 = 6000;
 
                             subtotal = qty * pricePerM2;
                         } else {
