@@ -89,12 +89,36 @@
         .tag-label { position: absolute; top: 15px; padding: 6px 14px; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); color: white; border-radius: 20px; font-size: 12px; font-weight: 700; pointer-events: none; }
         .tag-before { left: 15px; } .tag-after { right: 15px; }
 
-        /* --- PRICE CALCULATOR TỐI ƯU --- */
+        /* --- PRICE CALCULATOR DẠNG TICKBOX XỊN XÒ --- */
         .calculator-section { padding: 80px 0; background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%); }
-        .calc-card { background: var(--white); border-radius: var(--radius); padding: 35px; box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 800px; margin: 0 auto; }
-        .calc-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-bottom: 20px; }
-        .calc-result-box { background: var(--primary-light); padding: 25px; border-radius: 12px; text-align: center; border: 1px dashed var(--primary); margin-top: 20px; }
-        .calc-total-price { font-size: 38px; font-weight: 800; color: var(--accent); margin: 8px 0; }
+        .calc-card { background: var(--white); border-radius: var(--radius); padding: 35px; box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 850px; margin: 0 auto; }
+        
+        .calc-cat-title { font-size: 15px; font-weight: 800; color: var(--primary-dark); margin: 20px 0 10px 0; padding-bottom: 6px; border-bottom: 2px solid var(--primary-light); text-uppercase: uppercase; letter-spacing: 0.5px; }
+        .calc-cat-title:first-child { margin-top: 0; }
+
+        .calc-item-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;
+            margin-bottom: 10px; background: #ffffff; transition: all 0.2s ease; flex-wrap: wrap; gap: 12px;
+        }
+        .calc-item-row:hover { border-color: #bae6fd; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.06); }
+        .calc-item-row.active { border-color: var(--primary); background: var(--primary-light); }
+
+        .calc-item-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 260px; }
+        .calc-checkbox { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; flex-shrink: 0; }
+        .calc-item-info { display: flex; flex-direction: column; }
+        .calc-item-title { font-weight: 700; font-size: 14px; color: var(--text-main); cursor: pointer; }
+        .calc-item-price-tag { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+        .calc-item-right { display: flex; align-items: center; gap: 12px; }
+        .calc-qty-box { display: flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; }
+        .calc-qty-input { width: 65px; border: none; outline: none; font-size: 14px; font-weight: 700; text-align: center; color: var(--text-main); }
+        .calc-qty-unit { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+
+        .calc-item-subtotal { font-weight: 800; color: var(--accent); min-width: 95px; text-align: right; font-size: 14px; }
+
+        .calc-result-box { background: var(--primary-light); padding: 25px; border-radius: 12px; text-align: center; border: 1px dashed var(--primary); margin-top: 25px; }
+        .calc-total-price { font-size: 40px; font-weight: 800; color: var(--accent); margin: 8px 0; }
 
         /* --- SERVICES --- */
         .services { padding: 80px 0; background: var(--bg-light); }
@@ -175,10 +199,11 @@
             .hero-btns, .trust-list { justify-content: center; }
             .nav-menu { display: none; }
             .img-slider-wrapper { height: 280px; }
-            .calc-grid { grid-template-columns: 1fr; }
             .booking-box { padding: 25px; }
             
-            /* Thông báo ảo hiển thị đẹp mắt trên điện thoại */
+            .calc-item-left { min-width: 100%; }
+            .calc-item-right { width: 100%; justify-content: space-between; margin-top: 4px; }
+            
             .social-proof-popup { 
                 bottom: 90px; 
                 left: 15px; 
@@ -241,63 +266,249 @@
         </div>
     </section>
 
-    <!-- BẢNG TÍNH GIÁ TỰ ĐỘNG -->
+    <!-- BẢNG TÍNH GIÁ DẠNG TICKBOX TỰ ĐỘNG -->
     <section id="calculator" class="calculator-section">
         <div class="container">
-            <h2 class="section-title">🧮 Bảng Tính Giá Vệ Sinh Thông Minh</h2>
-            <p class="section-subtitle">Tùy chọn loại dịch vụ, số lượng & kích thước để xem tổng tiền tức thì</p>
+            <h2 class="section-title">🧮 Bảng Tính Giá Vệ Sinh Đa Năng</h2>
+            <p class="section-subtitle">Tick chọn dịch vụ muốn làm & nhập số lượng / số mét bên cạnh để tính tổng tiền</p>
             
             <div class="calc-card">
-                <div class="calc-grid">
-                    <div class="form-group">
-                        <label>1. Chọn loại sản phẩm / dịch vụ</label>
-                        <select id="calcType" class="form-control">
-                            <optgroup label="🛋️ Dịch vụ Sofa">
-                                <option value="sofa_1m2" data-unit="bộ" data-price="250000">Sofa 1m2 - 1m4 (250.000 đ/bộ)</option>
-                                <option value="sofa_1m6" data-unit="bộ" data-price="300000">Sofa 1m6 - 2m (300.000 đ/bộ)</option>
-                                <option value="sofa_2m2" data-unit="bộ" data-price="350000">Sofa 2m2 - 2m4 (350.000 đ/bộ)</option>
-                                <option value="sofa_l" data-unit="bộ" data-price="350000">Sofa Chữ L (từ 350.000 - 550.000 đ/bộ)</option>
-                                <option value="ghe_don" data-unit="cái" data-price="100000">Ghế đơn (100.000 - 150.000 đ/cái)</option>
-                            </optgroup>
-                            <optgroup label="🛏️ Dịch vụ Nệm Ngủ">
-                                <option value="nem_1m2" data-unit="tấm" data-price="250000">Nệm 1m2 - 1m4 (250.000 đ/tấm)</option>
-                                <option value="nem_1m6" data-unit="tấm" data-price="300000">Nệm 1m6 x 2m (300.000 đ/tấm)</option>
-                                <option value="nem_1m8" data-unit="tấm" data-price="350000">Nệm 1m8 x 2m (350.000 đ/tấm)</option>
-                            </optgroup>
-                            <optgroup label="🪟 Ghế & Rèm Cửa">
-                                <option value="ghe_cafe" data-unit="cái" data-price="30000">Ghế vải Cafe (30.000 đ/cái)</option>
-                                <option value="ghe_vp" data-unit="cái" data-price="40000">Ghế văn phòng (40.000 đ/cái)</option>
-                                <option value="rem" data-unit="mét" data-price="100000">Rèm cửa (100.000 đ/m)</option>
-                            </optgroup>
-                            <optgroup label="🏢 Thảm Văn Phòng">
-                                <option value="tham_vp" data-unit="m²" data-price="carpet">Thảm văn phòng (Tự động tính theo m²)</option>
-                            </optgroup>
-                        </select>
+                <!-- NHÓM SOFA -->
+                <div class="calc-cat-title">🛋️ Dịch Vụ Vệ Sinh Sofa</div>
+                
+                <div class="calc-item-row" data-price="250000" data-unit="bộ" data-title="Sofa 1m2 - 1m4">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Sofa 1m2 - 1m4</span>
+                            <span class="calc-item-price-tag">250.000 đ / bộ</span>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>2. Nhập Số lượng / Kích thước (<span id="calcUnitText">bộ</span>)</label>
-                        <input type="number" id="calcQty" class="form-control" value="1" min="1" step="1">
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">bộ</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
                     </div>
                 </div>
 
-                <div class="calc-grid" style="align-items: center; margin-bottom: 0;">
-                    <div class="form-group" id="leatherGroup">
-                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">
-                            <input type="checkbox" id="calcLeather" style="width: 18px; height: 18px; accent-color: var(--primary);">
-                            Chất liệu Sofa Da (+50.000 đ/bộ)
-                        </label>
+                <div class="calc-item-row" data-price="300000" data-unit="bộ" data-title="Sofa 1m6 - 2m">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Sofa 1m6 - 2m</span>
+                            <span class="calc-item-price-tag">300.000 đ / bộ</span>
+                        </div>
                     </div>
-                    <div class="form-group" style="text-align: right;">
-                        <span id="unitPriceNote" style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Đơn giá: 250.000 đ / bộ</span>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">bộ</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
                     </div>
                 </div>
 
+                <div class="calc-item-row" data-price="350000" data-unit="bộ" data-title="Sofa 2m2 - 2m4">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Sofa 2m2 - 2m4</span>
+                            <span class="calc-item-price-tag">350.000 đ / bộ</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">bộ</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="350000" data-unit="bộ" data-title="Sofa Chữ L">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Sofa Chữ L (chuẩn)</span>
+                            <span class="calc-item-price-tag">350.000 đ - 550.000 đ / bộ</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">bộ</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="50000" data-unit="bộ" data-title="Phụ phí Sofa Da">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Phụ phí Sofa Da (Làm sạch + Dưỡng da)</span>
+                            <span class="calc-item-price-tag">+50.000 đ / bộ</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">bộ</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <!-- NHÓM NỆM -->
+                <div class="calc-cat-title">🛏️ Dịch Vụ Vệ Sinh Nệm Ngủ</div>
+
+                <div class="calc-item-row" data-price="250000" data-unit="tấm" data-title="Nệm 1m2 - 1m4">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Nệm Ngủ 1m2 - 1m4</span>
+                            <span class="calc-item-price-tag">250.000 đ / tấm</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">tấm</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="300000" data-unit="tấm" data-title="Nệm 1m6 x 2m">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Nệm Ngủ 1m6 x 2m</span>
+                            <span class="calc-item-price-tag">300.000 đ / tấm</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">tấm</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="350000" data-unit="tấm" data-title="Nệm 1m8 x 2m">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Nệm Ngủ 1m8 x 2m</span>
+                            <span class="calc-item-price-tag">350.000 đ / tấm</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">tấm</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <!-- NHÓM GHẾ & RÈM -->
+                <div class="calc-cat-title">🪟 Ghế, Rèm Cửa & Thảm</div>
+
+                <div class="calc-item-row" data-price="30000" data-unit="cái" data-title="Ghế vải Cafe">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Ghế Vải Cafe</span>
+                            <span class="calc-item-price-tag">30.000 đ / cái</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">cái</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="40000" data-unit="cái" data-title="Ghế Văn Phòng">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Ghế Văn Phòng</span>
+                            <span class="calc-item-price-tag">40.000 đ / cái</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">cái</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="100000" data-unit="cái" data-title="Ghế Đơn">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Ghế Đơn</span>
+                            <span class="calc-item-price-tag">100.000 đ - 150.000 đ / cái</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">cái</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="100000" data-unit="m" data-title="Rèm cửa">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Rèm Cửa (Nhập số mét)</span>
+                            <span class="calc-item-price-tag">100.000 đ / m</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="1" min="1" disabled>
+                            <span class="calc-qty-unit">mét</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <div class="calc-item-row" data-price="carpet" data-unit="m²" data-title="Thảm Văn Phòng">
+                    <div class="calc-item-left">
+                        <input type="checkbox" class="calc-checkbox">
+                        <div class="calc-item-info">
+                            <span class="calc-item-title">Thảm Văn Phòng (Nhập diện tích m²)</span>
+                            <span class="calc-item-price-tag">Từ 6.000 đ - 10.000 đ / m²</span>
+                        </div>
+                    </div>
+                    <div class="calc-item-right">
+                        <div class="calc-qty-box">
+                            <input type="number" class="calc-qty-input" value="50" min="1" step="1" disabled>
+                            <span class="calc-qty-unit">m²</span>
+                        </div>
+                        <div class="calc-item-subtotal">0 đ</div>
+                    </div>
+                </div>
+
+                <!-- KẾT QUẢ TÍNH GIÁ -->
                 <div class="calc-result-box">
-                    <div style="font-size: 14px; color: var(--text-muted); font-weight: 700;">TỔNG TÍNH GIÁ DỰ KIẾN:</div>
-                    <div class="calc-total-price" id="calcTotalPrice">250.000 đ</div>
-                    <p id="calcNote" style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">(Cam kết chuẩn giá niêm Yết N.H clean - Đã bao gồm dung dịch sinh học)</p>
-                    <button id="btnBookFromCalc" class="btn btn-primary" style="width: 100%;">👉 ĐẶT LỊCH NGAY THEO BÁO GIÁ NÀY</button>
+                    <div style="font-size: 14px; color: var(--text-muted); font-weight: 700;">TỔNG CHI PHÍ DỰ KIẾN:</div>
+                    <div class="calc-total-price" id="calcTotalPrice">0 đ</div>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">(Cam kết chuẩn giá niêm yết N.H clean - Không phát sinh phụ phí)</p>
+                    <button id="btnBookFromCalc" class="btn btn-primary" style="width: 100%;">👉 ĐẶT LỊCH NGAY THEO TỔNG BÁO GIÁ NÀY</button>
                 </div>
             </div>
         </div>
@@ -587,7 +798,7 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC TÍNH GIÁ MULTI-TICKBOX -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Before/After Slider
@@ -602,87 +813,99 @@
                 });
             }
 
-            // 2. CALCULATOR LOGIC THÔNG MINH
-            const calcType = document.getElementById('calcType');
-            const calcQty = document.getElementById('calcQty');
-            const calcLeather = document.getElementById('calcLeather');
-            const calcUnitText = document.getElementById('calcUnitText');
-            const unitPriceNote = document.getElementById('unitPriceNote');
+            // 2. LOGIC TÍNH GIÁ TICKBOX TỰ ĐỘNG
+            const rows = document.querySelectorAll('.calc-item-row');
             const calcTotalPrice = document.getElementById('calcTotalPrice');
-            const calcNote = document.getElementById('calcNote');
-            const leatherGroup = document.getElementById('leatherGroup');
             const btnBookFromCalc = document.getElementById('btnBookFromCalc');
             const serviceInput = document.getElementById('service');
 
-            function calculateTotal() {
-                const selectedOpt = calcType.options[calcType.selectedIndex];
-                const val = selectedOpt.value;
-                const unit = selectedOpt.getAttribute('data-unit') || 'bộ';
-                let qty = parseFloat(calcQty.value) || 1;
-                if(qty < 1) qty = 1;
+            function updateCalculator() {
+                let grandTotal = 0;
 
-                calcUnitText.textContent = unit;
+                rows.forEach(row => {
+                    const checkbox = row.querySelector('.calc-checkbox');
+                    const qtyInput = row.querySelector('.calc-qty-input');
+                    const subtotalEl = row.querySelector('.calc-item-subtotal');
+                    const priceType = row.getAttribute('data-price');
+                    const unit = row.getAttribute('data-unit');
 
-                let total = 0;
-                let unitText = '';
+                    if (checkbox.checked) {
+                        row.classList.add('active');
+                        qtyInput.disabled = false;
 
-                if (val === 'tham_vp') {
-                    let pricePerM2 = 10000;
-                    if (qty >= 1000) pricePerM2 = 6000;
-                    else if (qty >= 500) pricePerM2 = 7000;
-                    else if (qty >= 100) pricePerM2 = 8000;
-                    else pricePerM2 = 10000;
+                        let qty = parseFloat(qtyInput.value) || 1;
+                        if (qty < 1) qty = 1;
 
-                    total = qty * pricePerM2;
-                    unitText = `Đơn giá: ${pricePerM2.toLocaleString('vi-VN')} đ/m² (Mức ${qty} m²)`;
-                    leatherGroup.style.display = 'none';
-                    calcLeather.checked = false;
-                } else {
-                    const basePrice = parseInt(selectedOpt.getAttribute('data-price')) || 0;
-                    let leatherAddon = 0;
+                        let subtotal = 0;
 
-                    if (val.startsWith('sofa')) {
-                        leatherGroup.style.display = 'block';
-                        if (calcLeather.checked) {
-                            leatherAddon = 50000;
+                        if (priceType === 'carpet') {
+                            // Thảm tính bậc thang
+                            let pricePerM2 = 10000;
+                            if (qty >= 1000) pricePerM2 = 6000;
+                            else if (qty >= 500) pricePerM2 = 7000;
+                            else if (qty >= 100) pricePerM2 = 8000;
+                            else pricePerM2 = 10000;
+
+                            subtotal = qty * pricePerM2;
+                        } else {
+                            const unitPrice = parseInt(priceType) || 0;
+                            subtotal = unitPrice * qty;
                         }
+
+                        subtotalEl.textContent = subtotal.toLocaleString('vi-VN') + ' đ';
+                        grandTotal += subtotal;
                     } else {
-                        leatherGroup.style.display = 'none';
-                        calcLeather.checked = false;
+                        row.classList.remove('active');
+                        qtyInput.disabled = true;
+                        subtotalEl.textContent = '0 đ';
                     }
+                });
 
-                    total = (basePrice + leatherAddon) * qty;
-                    unitText = `Đơn giá: ${(basePrice + leatherAddon).toLocaleString('vi-VN')} đ / ${unit}`;
-                }
-
-                unitPriceNote.textContent = unitText;
-                calcTotalPrice.textContent = total.toLocaleString('vi-VN') + ' đ';
-
-                if (val === 'sofa_l') {
-                    calcNote.textContent = '(Khoảng giá Sofa Chữ L từ 350.000đ - 550.000đ tùy theo kích thước thực tế)';
-                } else {
-                    calcNote.textContent = '(Cam kết giá chuẩn N.H clean - Đã bao gồm công giặt & dung dịch sinh học)';
-                }
+                calcTotalPrice.textContent = grandTotal.toLocaleString('vi-VN') + ' đ';
             }
 
-            if (calcType && calcQty) {
-                calcType.addEventListener('change', calculateTotal);
-                calcQty.addEventListener('input', calculateTotal);
-                calcLeather.addEventListener('change', calculateTotal);
-                calculateTotal();
-            }
+            // Sự kiện thay đổi trên các ô tickbox & ô nhập số
+            rows.forEach(row => {
+                const checkbox = row.querySelector('.calc-checkbox');
+                const qtyInput = row.querySelector('.calc-qty-input');
+                const titleEl = row.querySelector('.calc-item-title');
 
-            // Chuyển kết quả tính giá xuống Form Đặt Lịch
+                checkbox.addEventListener('change', updateCalculator);
+                qtyInput.addEventListener('input', updateCalculator);
+                
+                // Nhấp vào chữ tiêu đề cũng toggle tickbox
+                if(titleEl) {
+                    titleEl.addEventListener('click', () => {
+                        checkbox.checked = !checkbox.checked;
+                        updateCalculator();
+                    });
+                }
+            });
+
+            // Chuyển kết quả tính giá sang Form Đặt Lịch
             if (btnBookFromCalc) {
                 btnBookFromCalc.addEventListener('click', () => {
-                    const selectedText = calcType.options[calcType.selectedIndex].text;
-                    const qty = calcQty.value;
-                    const unit = calcUnitText.textContent;
-                    const total = calcTotalPrice.textContent;
-                    const isLeather = calcLeather.checked ? " (Sofa Da)" : "";
+                    let selectedItems = [];
+                    
+                    rows.forEach(row => {
+                        const checkbox = row.querySelector('.calc-checkbox');
+                        if (checkbox.checked) {
+                            const title = row.getAttribute('data-title');
+                            const qty = row.querySelector('.calc-qty-input').value;
+                            const unit = row.getAttribute('data-unit');
+                            const subtotal = row.querySelector('.calc-item-subtotal').textContent;
+                            selectedItems.push(`${title} (x${qty} ${unit}: ${subtotal})`);
+                        }
+                    });
 
+                    if (selectedItems.length === 0) {
+                        alert('⚠️ Bạn vui lòng tick chọn ít nhất 1 dịch vụ để tính giá!');
+                        return;
+                    }
+
+                    const totalText = calcTotalPrice.textContent;
                     if (serviceInput) {
-                        serviceInput.value = `${selectedText}${isLeather} - SL: ${qty} ${unit} - Báo giá: ${total}`;
+                        serviceInput.value = `${selectedItems.join(', ')} => Tổng: ${totalText}`;
                     }
 
                     document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
@@ -746,7 +969,7 @@
                     const service = document.getElementById('service').value;
                     const address = document.getElementById('address').value.trim() || 'Chưa cung cấp';
 
-                    const message = `Xin chào N.H clean! Tôi muốn tư vấn / đặt lịch dịch vụ:\n- Họ tên: ${fullname}\n- SĐT: ${phone}\n- Thông tin & Báo giá: ${service}\n- Địa chỉ: ${address}`;
+                    const message = `Xin chào N.H clean! Tôi muốn tư vấn / đặt lịch dịch vụ:\n- Họ tên: ${fullname}\n- SĐT: ${phone}\n- Thông tin dịch vụ chọn: ${service}\n- Địa chỉ: ${address}`;
                     
                     const zaloPhone = '0338928237';
                     const zaloUrl = `https://zalo.me/${zaloPhone}?text=${encodeURIComponent(message)}`;
